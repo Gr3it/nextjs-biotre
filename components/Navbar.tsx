@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ExternalLink, Menu, X, User, LogOut } from "lucide-react";
+import { ExternalLink, Menu, X } from "lucide-react";
 import { SessionData } from "@auth0/nextjs-auth0/types";
 
 function NavLink({
