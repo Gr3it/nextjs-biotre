@@ -152,7 +152,7 @@ export default function Navbar({ session }: { session: SessionData | null }) {
                 onClick={() => setIsOpen(false)}
                 className="block w-full px-5 py-2.5 bg-accent text-white rounded-lg font-medium hover:opacity-90 transition-opacity"
               >
-                Accesso Area Riservata
+                Area Riservata
               </a>
             )}
           </div>
