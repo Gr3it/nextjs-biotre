@@ -85,7 +85,7 @@ export default function Navbar({ session }: { session: SessionData | null }) {
             {user ? (
               <a
                 href="/auth/logout"
-                className="inline-block px-5 py-2.5 bg-accent text-white rounded-lg font-medium hover:opacity-90 transition-opacity"
+                className="inline-block px-5 py-2.5 bg-error text-white rounded-lg font-medium hover:opacity-90 transition-opacity"
                 title="Logout"
               >
                 Logout
@@ -139,36 +139,18 @@ export default function Navbar({ session }: { session: SessionData | null }) {
           </NavLink>
           <div className="mt-2 text-center w-full">
             {user ? (
-              <div className="flex flex-col gap-2">
-                <Link
-                  href="/auth/profile"
-                  onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-center gap-3 px-4 py-3 bg-primary/5 rounded-lg font-medium"
-                >
-                  {user.picture && (
-                    <Image
-                      src={user.picture}
-                      alt={user.name || "User"}
-                      width={32}
-                      height={32}
-                      className="rounded-full"
-                    />
-                  )}
-                  <span>{user.name}</span>
-                </Link>
-                <a
-                  href="/auth/logout"
-                  onClick={() => setIsOpen(false)}
-                  className="block w-full px-4 py-3 border border-border text-text rounded-lg font-medium hover:bg-red-50 hover:text-red-600 transition-colors"
-                >
-                  Logout
-                </a>
-              </div>
+              <a
+                href="/auth/logout"
+                onClick={() => setIsOpen(false)}
+                className="block w-full px-5 py-2.5 bg-error text-white rounded-lg font-medium hover:opacity-90 transition-opacity"
+              >
+                Logout
+              </a>
             ) : (
               <a
                 href="/auth/login"
                 onClick={() => setIsOpen(false)}
-                className="block w-full px-4 py-3 border border-transparent bg-accent text-white rounded-lg font-medium hover:opacity-90 transition-opacity text-lg"
+                className="block w-full px-5 py-2.5 bg-accent text-white rounded-lg font-medium hover:opacity-90 transition-opacity"
               >
                 Accesso Area Riservata
               </a>
