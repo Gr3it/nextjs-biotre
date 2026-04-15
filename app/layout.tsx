@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Lora } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { auth0 } from "@/lib/auth0";
 import "./globals.css";
 
 const inter = Inter({
@@ -29,21 +30,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth0.getSession();
   return (
     <html
       lang="it"
       className={`${inter.variable} ${lora.variable} font-sans h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar />
-        <main className="flex-grow">
-          {children}
-        </main>
+        <Navbar session={session} />
+        <main className="grow">{children}</main>
         <Footer />
       </body>
     </html>

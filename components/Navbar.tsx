@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ExternalLink, Menu, X } from "lucide-react";
+import { ExternalLink, Menu, X, User, LogOut } from "lucide-react";
+import { SessionData } from "@auth0/nextjs-auth0/types";
 
 function NavLink({
   href,
@@ -41,8 +42,9 @@ function NavLink({
   );
 }
 
-export default function Navbar() {
+export default function Navbar({ session }: { session: SessionData | null }) {
   const [isOpen, setIsOpen] = useState(false);
+  const user = session?.user;
 
   return (
     <header className="sticky top-0 z-50 w-full px-4 sm:px-6 lg:px-12 bg-bg border-b border-border">
@@ -79,13 +81,23 @@ export default function Navbar() {
           <NavLink href="http://webmail.biotre-tn.it/" isExternal>
             Webmail
           </NavLink>
-          <div className="pl-4 ml-2 border-l border-border/50">
-            <a
-              href="/api/auth/login"
-              className="inline-block px-5 py-2.5 bg-accent text-white rounded-lg font-medium hover:opacity-90 transition-opacity"
-            >
-              Area Riservata
-            </a>
+          <div className="pl-4 ml-2 border-l border-border/50 flex items-center gap-3">
+            {user ? (
+              <a
+                href="/auth/logout"
+                className="inline-block px-5 py-2.5 bg-accent text-white rounded-lg font-medium hover:opacity-90 transition-opacity"
+                title="Logout"
+              >
+                Logout
+              </a>
+            ) : (
+              <a
+                href="/auth/login"
+                className="inline-block px-5 py-2.5 bg-accent text-white rounded-lg font-medium hover:opacity-90 transition-opacity"
+              >
+                Area Riservata
+              </a>
+            )}
           </div>
         </nav>
 
@@ -126,13 +138,41 @@ export default function Navbar() {
             Webmail
           </NavLink>
           <div className="mt-2 text-center w-full">
-            <a
-              href="/api/auth/login"
-              onClick={() => setIsOpen(false)}
-              className="block w-full px-4 py-3 border border-transparent bg-accent text-white rounded-lg font-medium hover:opacity-90 transition-opacity text-lg"
-            >
-              Accesso Area Riservata
-            </a>
+            {user ? (
+              <div className="flex flex-col gap-2">
+                <Link
+                  href="/auth/profile"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center justify-center gap-3 px-4 py-3 bg-primary/5 rounded-lg font-medium"
+                >
+                  {user.picture && (
+                    <Image
+                      src={user.picture}
+                      alt={user.name || "User"}
+                      width={32}
+                      height={32}
+                      className="rounded-full"
+                    />
+                  )}
+                  <span>{user.name}</span>
+                </Link>
+                <a
+                  href="/auth/logout"
+                  onClick={() => setIsOpen(false)}
+                  className="block w-full px-4 py-3 border border-border text-text rounded-lg font-medium hover:bg-red-50 hover:text-red-600 transition-colors"
+                >
+                  Logout
+                </a>
+              </div>
+            ) : (
+              <a
+                href="/auth/login"
+                onClick={() => setIsOpen(false)}
+                className="block w-full px-4 py-3 border border-transparent bg-accent text-white rounded-lg font-medium hover:opacity-90 transition-opacity text-lg"
+              >
+                Accesso Area Riservata
+              </a>
+            )}
           </div>
         </div>
       )}
