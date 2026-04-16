@@ -1,6 +1,5 @@
 import Image from "next/image";
 import HeroCarousel from "@/components/HeroCarousel";
-import { ArrowDown } from "lucide-react";
 
 export default function Home() {
   return (
@@ -80,7 +79,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="w-full relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg border border-border/50 order-1 lg:order-2">
+          <div className="w-full relative aspect-4/3 rounded-2xl overflow-hidden shadow-lg border border-border/50 order-1 lg:order-2">
             <Image
               src="/images/Members.jpeg"
               alt="I soci di Biotre GAS Trento"
