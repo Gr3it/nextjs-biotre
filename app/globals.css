@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --color-primary: #3A5A40;
-  --color-primary-dark: #2D4531;
-  --color-primary-light: #6B9E73;
-  --color-accent: #B5603A;
-  --color-bg: #FAF7F2;
-  --color-bg-alt: #F0EBE1;
-  --color-bg-dark: #1E2D22;
-  --color-text: #2C2416;
-  --color-text-muted: #6B5E4E;
-  --color-border: #DDD4C5;
-  --color-white: #FFFFFF;
-  --color-error: #A53325;
-  --color-success: #4A7A52;
+  --color-primary: #3a5a40;
+  --color-primary-dark: #2d4531;
+  --color-primary-light: #6b9e73;
+  --color-accent: #b5603a;
+  --color-bg: #faf7f2;
+  --color-bg-alt: #f0ebe1;
+  --color-bg-dark: #1e2d22;
+  --color-text: #2c2416;
+  --color-text-muted: #6b5e4e;
+  --color-border: #ddd4c5;
+  --color-white: #ffffff;
+  --color-error: #a53325;
+  --color-success: #4a7a52;
 
   --space-1: 4px;
   --space-2: 8px;
@@ -51,6 +51,7 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
 }
 
 ::selection {
