@@ -85,7 +85,7 @@ export default function Navbar({ session }: { session: SessionData | null }) {
             {user && (
               <>
                 <NavLink href="/calendario-ordini">Calendario Ordini</NavLink>
-                <NavLink href="/verbali">Verbali</NavLink>
+                <NavLink href="/archiovio-atti">Archivio Atti</NavLink>
               </>
             )}
             {user ? (
@@ -153,11 +153,11 @@ export default function Navbar({ session }: { session: SessionData | null }) {
                 Calendario Ordini
               </NavLink>
               <NavLink
-                href="/verbali"
+                href="/archiovio-atti"
                 onClick={() => setIsOpen(false)}
                 className="text-lg w-full"
               >
-                Verbali
+                Archivio Atti
               </NavLink>
             </div>
           )}
