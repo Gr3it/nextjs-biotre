@@ -45,9 +45,6 @@ export default function Home() {
 
             <div className="flex flex-wrap gap-3">
               <span className="px-4 py-1.5 bg-primary-light/20 text-primary-dark font-medium rounded-full border border-primary-light/30 text-sm">
-                30 soci
-              </span>
-              <span className="px-4 py-1.5 bg-primary-light/20 text-primary-dark font-medium rounded-full border border-primary-light/30 text-sm">
                 km 0
               </span>
               <span className="px-4 py-1.5 bg-primary-light/20 text-primary-dark font-medium rounded-full border border-primary-light/30 text-sm">
@@ -62,10 +59,10 @@ export default function Home() {
                 giardino c’è una “cassa” dalla quale i soci ritirano i prodotti
                 che hanno ordinato. Il “via vai” che si forma e l’incontro dei
                 soci, creano affiatamento e gruppo. Ma non è solo lei che
-                distribuisce i prodotti ordinati, ognuno dei attuali 30 soci, fa
-                da punto di arrivo e distribuzione della merce e ciascuno ha un
-                “compito” ben preciso, questo è l’unico modo perché
-                l’Associazione possa esistere.
+                distribuisce i prodotti ordinati, ognuno dei soci fa da punto di
+                arrivo e distribuzione della merce e ciascuno ha un “compito”
+                ben preciso, questo è l’unico modo perché l’Associazione possa
+                esistere.
               </p>
               <p>
                 I prodotti vengono ordinati direttamente dal produttore che deve
@@ -102,15 +99,16 @@ export default function Home() {
       >
         <div className="max-w-[800px] mx-auto w-full flex flex-col items-center text-center gap-8 bg-white p-10 sm:p-14 lg:p-16 rounded-3xl shadow-sm border border-border/50">
           <h2 className="text-h2 font-serif text-primary-dark">Contatti</h2>
-          
+
           <p className="text-lg text-text/90 leading-relaxed max-w-[600px]">
-            Se sei interessato a conoscere la nostra associazione scrivi a <strong>info@biotre-tn.it</strong>, 
-            riceverai tutte le informazioni di cui hai bisogno.
+            Se sei interessato a conoscere la nostra associazione scrivi a{" "}
+            <strong>info@biotre-tn.it</strong>, riceverai tutte le informazioni
+            di cui hai bisogno.
           </p>
 
           <a
             href="mailto:info@biotre-tn.it"
-            className="mt-2 inline-flex items-center justify-center px-8 py-3 bg-transparent text-primary border-[2px] border-primary rounded-lg font-medium hover:bg-primary hover:text-white transition-all transform hover:scale-[1.02]"
+            className="mt-2 inline-flex items-center justify-center px-8 py-3 bg-transparent text-primary border-2px border-primary rounded-lg font-medium hover:bg-primary hover:text-white transition-all transform hover:scale-[1.02]"
           >
             Invia un'email
           </a>

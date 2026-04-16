@@ -51,7 +51,7 @@ export default function Navbar({ session }: { session: SessionData | null }) {
       <div className="max-w-[1400px] w-full mx-auto flex h-20 items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           {/* Mobile Logo */}
-          <div className="md:hidden flex items-center h-full">
+          <div className="lg:hidden flex items-center h-full">
             <Image
               src="/logo/LogoSmall.png"
               alt="Biotre GAS Logo"
@@ -61,7 +61,7 @@ export default function Navbar({ session }: { session: SessionData | null }) {
             />
           </div>
           {/* Desktop Logo */}
-          <div className="hidden md:flex items-center h-full">
+          <div className="hidden lg:flex items-center h-full">
             <Image
               src="/logo/LogoFull.png"
               alt="Biotre GAS Logo"
@@ -73,7 +73,7 @@ export default function Navbar({ session }: { session: SessionData | null }) {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-2">
+        <nav className="hidden lg:flex items-center gap-2">
           <NavLink href="/">Home</NavLink>
           <NavLink href="http://www.agora-gas.it/gas/ag3_biotre/" isExternal>
             Gestionale Ordini
@@ -81,11 +81,17 @@ export default function Navbar({ session }: { session: SessionData | null }) {
           <NavLink href="http://webmail.biotre-tn.it/" isExternal>
             Webmail
           </NavLink>
-          <div className="pl-4 ml-2 border-l border-border/50 flex items-center gap-3">
+          <div className="pl-4 ml-2 border-l border-border/50 flex items-center gap-1">
+            {user && (
+              <>
+                <NavLink href="/calendario-ordini">Calendario Ordini</NavLink>
+                <NavLink href="/verbali">Verbali</NavLink>
+              </>
+            )}
             {user ? (
               <a
                 href="/auth/logout"
-                className="inline-block px-5 py-2.5 bg-error text-white rounded-lg font-medium hover:opacity-90 transition-opacity"
+                className="inline-block px-5 py-2.5 bg-error text-white rounded-lg font-medium hover:opacity-90 transition-opacity ml-2"
                 title="Logout"
               >
                 Logout
@@ -93,7 +99,7 @@ export default function Navbar({ session }: { session: SessionData | null }) {
             ) : (
               <a
                 href="/auth/login"
-                className="inline-block px-5 py-2.5 bg-accent text-white rounded-lg font-medium hover:opacity-90 transition-opacity"
+                className="inline-block px-5 py-2.5 bg-accent text-white rounded-lg font-medium hover:opacity-90 transition-opacity ml-2"
               >
                 Area Riservata
               </a>
@@ -103,7 +109,7 @@ export default function Navbar({ session }: { session: SessionData | null }) {
 
         {/* Mobile menu button */}
         <button
-          className="md:hidden p-2 text-text hover:text-primary transition-colors"
+          className="lg:hidden p-2 text-text hover:text-primary transition-colors cursor-pointer"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle Menu"
         >
@@ -113,7 +119,7 @@ export default function Navbar({ session }: { session: SessionData | null }) {
 
       {/* Mobile Nav Drawer */}
       {isOpen && (
-        <div className="md:hidden bg-bg border-b border-border absolute top-20 left-0 w-full flex flex-col pt-2 pb-6 px-4 gap-2 shadow-sm">
+        <div className="lg:hidden bg-bg border-b border-border absolute top-20 left-0 w-full flex flex-col pt-2 pb-6 px-4 gap-2 shadow-sm">
           <NavLink
             href="/"
             onClick={() => setIsOpen(false)}
@@ -137,6 +143,24 @@ export default function Navbar({ session }: { session: SessionData | null }) {
           >
             Webmail
           </NavLink>
+          {user && (
+            <div className="mt-2 pt-2 border-t border-border/50 flex flex-col gap-1 w-full">
+              <NavLink
+                href="/calendario-ordini"
+                onClick={() => setIsOpen(false)}
+                className="text-lg w-full"
+              >
+                Calendario Ordini
+              </NavLink>
+              <NavLink
+                href="/verbali"
+                onClick={() => setIsOpen(false)}
+                className="text-lg w-full"
+              >
+                Verbali
+              </NavLink>
+            </div>
+          )}
           <div className="mt-2 text-center w-full">
             {user ? (
               <a
