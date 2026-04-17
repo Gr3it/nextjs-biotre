@@ -3,7 +3,10 @@ import { google } from "googleapis";
 const auth = new google.auth.GoogleAuth({
   credentials: {
     client_email: process.env.GOOGLE_CLIENT_EMAIL,
-    private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+    private_key: process.env.GOOGLE_PRIVATE_KEY
+      ?.replace(/\\n/g, "\n")
+      .replace(/(^"|"$)/g, "")
+      .replace(/(^'|'$)/g, ""),
   },
   scopes: ["https://www.googleapis.com/auth/drive.readonly"],
 });
@@ -17,14 +20,19 @@ export interface DriveFile {
   year: string;
 }
 
-async function getFolderId(name: string, parentId?: string): Promise<string | null> {
+async function getFolderId(
+  name: string,
+  parentId?: string,
+): Promise<string | null> {
   let query = `name = '${name}' and mimeType = 'application/vnd.google-apps.folder' and trashed = false`;
   if (parentId) {
     query += ` and '${parentId}' in parents`;
   }
-  
-  console.log(`[Drive] Searching for folder: "${name}" (Parent: ${parentId || "root"})`);
-  
+
+  console.log(
+    `[Drive] Searching for folder: "${name}" (Parent: ${parentId || "root"})`,
+  );
+
   const res = await drive.files.list({
     q: query,
     fields: "files(id, name)",
@@ -45,7 +53,10 @@ export async function getFilesFromFolder(path: string): Promise<DriveFile[]> {
     if (process.env.GOOGLE_DRIVE_ROOT_ID) {
       parentId = process.env.GOOGLE_DRIVE_ROOT_ID;
       console.log(`[Drive] Starting from ROOT_ID: ${parentId}`);
-    } else if (process.env.GOOGLE_DRIVE_FOLDER_ID && parts[0] === "Archivio Atti") {
+    } else if (
+      process.env.GOOGLE_DRIVE_FOLDER_ID &&
+      parts[0] === "Archivio Atti"
+    ) {
       // If we are looking for the root archive and have an ID, use it
       parentId = process.env.GOOGLE_DRIVE_FOLDER_ID;
       parts.shift(); // Remove "Archivio Atti" from parts as we already have its ID
@@ -57,12 +68,14 @@ export async function getFilesFromFolder(path: string): Promise<DriveFile[]> {
       if (!folderId) {
         console.error(`[Drive] Path part not found: ${part}`);
         // Fallback: try to find the folder anywhere if it's a specific category
-        if (["Bilanci", "Verbali Assemblea", "Verbali Direttivo"].includes(part)) {
+        if (
+          ["Bilanci", "Verbali Assemblea", "Verbali Direttivo"].includes(part)
+        ) {
           console.log(`[Drive] Fallback search for "${part}" anywhere...`);
           const anywhereId = await getFolderId(part);
           if (anywhereId) {
-             parentId = anywhereId;
-             continue;
+            parentId = anywhereId;
+            continue;
           }
         }
         return [];
@@ -84,11 +97,11 @@ export async function getFilesFromFolder(path: string): Promise<DriveFile[]> {
     return (res.data.files || []).map((file) => {
       let year = "";
       const name = file.name || "";
-      
+
       // Bilanci: anno_Bilancio (es: 2023_Bilancio)
       if (name.includes("_Bilancio")) {
         year = name.split("_")[0];
-      } 
+      }
       // Verbali: yyyy-mm-dd_Assemblea (es: 2024-03-12_Assemblea)
       else if (name.includes("_Assemblea") || name.includes("_Direttivo")) {
         const match = name.match(/^(\d{4})/);
