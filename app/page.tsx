@@ -1,9 +1,39 @@
 import Image from "next/image";
 import HeroCarousel from "@/components/HeroCarousel";
 import FaqAccordion from "@/components/FaqAccordion";
+import ProducersGrid from "@/components/ProducersGrid";
 import { Heart, Leaf, Handshake, MapPin } from "lucide-react";
+import { getGoogleSheetData } from "@/lib/sheets";
 
-export default function Home() {
+export const revalidate = 86400; // Cache for 24 hours
+
+async function getProducersData() {
+  try {
+    const rows = await getGoogleSheetData("Sheet1!A1:B200");
+    if (!rows || rows.length <= 1) return [];
+
+    // Filter out rows where producer name is empty or looks like a header
+    return rows
+      .slice(1)
+      .filter(
+        (row) =>
+          row[0] &&
+          String(row[0]).trim() !== "" &&
+          String(row[0]).toLowerCase() !== "produttore",
+      )
+      .map((row) => ({
+        name: String(row[0]).trim(),
+        products: String(row[1] || "").trim(),
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+  } catch (error) {
+    console.error("[Producers] Error fetching data:", error);
+    return [];
+  }
+}
+
+export default async function Home() {
+  const producers = await getProducersData();
   return (
     <div className="flex flex-col w-full">
       {/* ================= HERO SECTION ================= */}
@@ -76,7 +106,7 @@ export default function Home() {
       {/* ================= I PILASTRI SECTION ================= */}
       <section
         id="pilastri"
-        className="w-full bg-white py-16 lg:py-24 px-4 sm:px-6 lg:px-12 scroll-mt-20"
+        className="w-full bg-bg-alt py-16 lg:py-24 px-4 sm:px-6 lg:px-12 scroll-mt-20"
       >
         <div className="max-w-[1400px] mx-auto w-full flex flex-col gap-16">
           <div className="flex flex-col items-center text-center gap-4 max-w-[800px] mx-auto">
@@ -154,7 +184,7 @@ export default function Home() {
       {/* ================= 2. CHI SIAMO (Identità) ================= */}
       <section
         id="chi-siamo"
-        className="w-full bg-bg-alt py-16 lg:py-24 px-4 sm:px-6 lg:px-12 scroll-mt-20"
+        className="w-full bg-bg py-16 lg:py-24 px-4 sm:px-6 lg:px-12 scroll-mt-20"
       >
         <div className="max-w-[1400px] mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div className="flex flex-col gap-6 order-2 lg:order-1">
@@ -207,7 +237,7 @@ export default function Home() {
       {/* ================= 3. TERRITORIO (Vicinanza) ================= */}
       <section
         id="territorio"
-        className="w-full bg-white py-16 lg:py-24 px-4 sm:px-6 lg:px-12 scroll-mt-20"
+        className="w-full bg-bg-alt py-16 lg:py-24 px-4 sm:px-6 lg:px-12 scroll-mt-20"
       >
         <div className="max-w-[1400px] mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div className="order-1 lg:order-1 bg-bg-alt p-10 lg:p-16 rounded-3xl border border-border flex flex-col items-center text-center gap-6 shadow-sm">
@@ -269,7 +299,7 @@ export default function Home() {
       {/* ================= 4. COME FUNZIONA (Azione) ================= */}
       <section
         id="come-funziona"
-        className="w-full bg-bg-alt py-16 lg:py-24 px-4 sm:px-6 lg:px-12 scroll-mt-20"
+        className="w-full bg-bg py-16 lg:py-24 px-4 sm:px-6 lg:px-12 scroll-mt-20"
       >
         <div className="max-w-[1400px] mx-auto w-full flex flex-col gap-12">
           <div className="flex flex-col items-center text-center gap-4">
@@ -329,10 +359,31 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ================= 4.5 PRODUTTORI (Data from Sheets) ================= */}
+      <section
+        id="produttori"
+        className="w-full bg-bg-alt py-16 lg:py-24 px-4 sm:px-6 lg:px-12 scroll-mt-20"
+      >
+        <div className="max-w-[1400px] mx-auto w-full flex flex-col gap-12">
+          <div className="flex flex-col items-center text-center gap-4">
+            <h2 className="text-h2 font-serif text-primary-dark">
+              I nostri Produttori
+            </h2>
+            <p className="text-body text-text-muted max-w-[700px]">
+              Il legame diretto con chi coltiva e produce è alla base della
+              nostra fiducia. Ecco i partner che rendono possibile la nostra
+              spesa etica e di qualità.
+            </p>
+          </div>
+
+          <ProducersGrid producers={producers} />
+        </div>
+      </section>
+
       {/* ================= 5. DOMANDE E CURIOSITÀ ================= */}
       <section
         id="faq"
-        className="w-full bg-white py-16 lg:py-24 px-4 sm:px-6 lg:px-12 scroll-mt-20"
+        className="w-full bg-bg py-16 lg:py-24 px-4 sm:px-6 lg:px-12 scroll-mt-20"
       >
         <div className="max-w-[1400px] mx-auto w-full flex flex-col gap-12 sm:gap-16">
           <div className="flex flex-col items-center text-center gap-4">
