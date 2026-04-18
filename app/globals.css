@@ -14,16 +14,6 @@
   --color-white: #ffffff;
   --color-error: #a53325;
   --color-success: #4a7a52;
-
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-6: 24px;
-  --space-8: 32px;
-  --space-12: 48px;
-  --space-16: 64px;
-  --space-24: 96px;
 }
 
 @theme inline {
@@ -45,6 +35,58 @@
   --font-serif: var(--font-lora);
 }
 
+/* Typographic Utilities from Style Guidelines */
+@utility text-display {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+@utility text-h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+@utility text-h2 {
+  font-size: 1.875rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+@utility text-h3 {
+  font-size: 1.375rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+@utility text-h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+@utility text-body {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+@utility text-small {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+@utility text-xs {
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -62,6 +104,8 @@ html {
 body {
   background-color: var(--color-bg);
   color: var(--color-text);
+  font-family: var(--font-inter);
+  line-height: 1.7;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -71,6 +115,11 @@ body {
   .fade-in-delay-1 {
     animation: fadeIn 600ms ease forwards;
     animation-delay: 200ms;
+    opacity: 0;
+  }
+  .fade-in-delay-2 {
+    animation: fadeIn 600ms ease forwards;
+    animation-delay: 400ms;
     opacity: 0;
   }
 }
