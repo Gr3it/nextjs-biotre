@@ -12,14 +12,16 @@ const images = [
 
 export default function HeroCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   // Autoplay
   useEffect(() => {
+    if (isPaused) return;
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
     }, 4000);
     return () => clearInterval(timer);
-  }, []);
+  }, [isPaused]);
 
   const goToNext = () => setCurrentIndex((prev) => (prev + 1) % images.length);
   const goToPrev = () =>
@@ -27,7 +29,11 @@ export default function HeroCarousel() {
   const goToIndex = (idx: number) => setCurrentIndex(idx);
 
   return (
-    <div className="relative w-full aspect-square sm:aspect-video max-h-[600px] overflow-hidden rounded-2xl shadow-md group border border-border">
+    <div
+      className="relative w-full aspect-square sm:aspect-video max-h-[600px] overflow-hidden rounded-2xl shadow-md group border border-border"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       <div
         className="flex h-full w-full transition-transform duration-700 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -49,14 +55,14 @@ export default function HeroCarousel() {
       <div className="absolute inset-0 flex items-center justify-between px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         <button
           onClick={goToPrev}
-          className="p-2 rounded-full bg-white/80 text-primary-dark hover:bg-white hover:scale-105 transition-all shadow-sm"
+          className="p-2 rounded-full bg-white/80 text-primary-dark hover:bg-white hover:scale-105 transition-all shadow-sm cursor-pointer"
           aria-label="Immagine precedente"
         >
           <ChevronLeft className="w-6 h-6" />
         </button>
         <button
           onClick={goToNext}
-          className="p-2 rounded-full bg-white/80 text-primary-dark hover:bg-white hover:scale-105 transition-all shadow-sm"
+          className="p-2 rounded-full bg-white/80 text-primary-dark hover:bg-white hover:scale-105 transition-all shadow-sm cursor-pointer"
           aria-label="Immagine successiva"
         >
           <ChevronRight className="w-6 h-6" />
@@ -69,7 +75,7 @@ export default function HeroCarousel() {
           <button
             key={i}
             onClick={() => goToIndex(i)}
-            className={`w-2.5 h-2.5 rounded-full transition-all ${
+            className={`w-2.5 h-2.5 rounded-full transition-all cursor-pointer ${
               i === currentIndex
                 ? "bg-white scale-110 shadow-sm"
                 : "bg-white/50 hover:bg-white/80"

@@ -289,7 +289,7 @@ export default async function Home() {
               <p>
                 Mantenere le distanze ridotte ci permette di abbattere le
                 emissioni di CO2 e ottimizzare il tempo dedicato al ritiro,
-                rafforzando il legame con il nostro territorio immediato.
+                rafforzando il legame con il nostro territorio.
               </p>
             </div>
           </div>
