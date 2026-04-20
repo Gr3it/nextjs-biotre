@@ -51,7 +51,7 @@ export default function Navbar({ session }: { session: SessionData | null }) {
       <div className="max-w-[1400px] w-full mx-auto flex h-20 items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           {/* Mobile Logo */}
-          <div className="lg:hidden flex items-center h-full">
+          <div className="xl:hidden flex items-center h-full">
             <Image
               src="/logo/LogoSmall.png"
               alt="Biotre GAS Logo"
@@ -61,7 +61,7 @@ export default function Navbar({ session }: { session: SessionData | null }) {
             />
           </div>
           {/* Desktop Logo */}
-          <div className="hidden lg:flex items-center h-full">
+          <div className="hidden xl:flex items-center h-full">
             <Image
               src="/logo/LogoFull.png"
               alt="Biotre GAS Logo"
@@ -74,20 +74,34 @@ export default function Navbar({ session }: { session: SessionData | null }) {
 
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-2">
-          <NavLink href="/">Home</NavLink>
-          <NavLink href="http://www.agora-gas.it/gas/ag3_biotre/" isExternal>
-            Gestionale Ordini
-          </NavLink>
-          <NavLink href="http://webmail.biotre-tn.it/" isExternal>
-            Webmail
-          </NavLink>
+          {user ? (
+            <>
+              <NavLink href="/">Home</NavLink>
+              <NavLink href="/calendario-ordini">Calendario Ordini</NavLink>
+              <NavLink href="/archiovio-atti">Archivio Atti</NavLink>
+              <NavLink
+                href="http://www.agora-gas.it/gas/ag3_biotre/"
+                isExternal
+              >
+                Gestionale Ordini
+              </NavLink>
+              <NavLink href="http://webmail.biotre-tn.it/" isExternal>
+                Webmail
+              </NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink href="/#pilastri">Valori</NavLink>
+              <NavLink href="/#chi-siamo">Chi Siamo</NavLink>
+              <NavLink href="/#territorio">Territorio</NavLink>
+              <NavLink href="/#come-funziona">Come funziona</NavLink>
+              <NavLink href="/#produttori">Produttori</NavLink>
+              <NavLink href="/#faq">FAQ</NavLink>
+              <NavLink href="/#contatti">Contatti</NavLink>
+            </>
+          )}
+
           <div className="pl-4 ml-2 border-l border-border/50 flex items-center gap-1">
-            {user && (
-              <>
-                <NavLink href="/calendario-ordini">Calendario Ordini</NavLink>
-                <NavLink href="/archiovio-atti">Archivio Atti</NavLink>
-              </>
-            )}
             {user ? (
               <a
                 href="/auth/logout"
@@ -120,31 +134,15 @@ export default function Navbar({ session }: { session: SessionData | null }) {
       {/* Mobile Nav Drawer */}
       {isOpen && (
         <div className="lg:hidden bg-bg border-b border-border absolute top-20 left-0 w-full flex flex-col pt-2 pb-6 px-4 gap-2 shadow-sm">
-          <NavLink
-            href="/"
-            onClick={() => setIsOpen(false)}
-            className="text-lg w-full"
-          >
-            Home
-          </NavLink>
-          <NavLink
-            href="http://www.agora-gas.it/gas/ag3_biotre/"
-            isExternal
-            onClick={() => setIsOpen(false)}
-            className="text-lg w-full"
-          >
-            Gestionale Ordini
-          </NavLink>
-          <NavLink
-            href="http://webmail.biotre-tn.it/"
-            isExternal
-            onClick={() => setIsOpen(false)}
-            className="text-lg w-full"
-          >
-            Webmail
-          </NavLink>
-          {user && (
-            <div className="mt-2 pt-2 border-t border-border/50 flex flex-col gap-1 w-full">
+          {user ? (
+            <>
+              <NavLink
+                href="/"
+                onClick={() => setIsOpen(false)}
+                className="text-lg w-full"
+              >
+                Home
+              </NavLink>
               <NavLink
                 href="/calendario-ordini"
                 onClick={() => setIsOpen(false)}
@@ -159,7 +157,77 @@ export default function Navbar({ session }: { session: SessionData | null }) {
               >
                 Archivio Atti
               </NavLink>
-            </div>
+              <div className="mt-2 pt-2 border-t border-border/50 flex flex-col gap-1 w-full">
+                <NavLink
+                  href="http://www.agora-gas.it/gas/ag3_biotre/"
+                  isExternal
+                  onClick={() => setIsOpen(false)}
+                  className="text-lg w-full"
+                >
+                  Gestionale Ordini
+                </NavLink>
+                <NavLink
+                  href="http://webmail.biotre-tn.it/"
+                  isExternal
+                  onClick={() => setIsOpen(false)}
+                  className="text-lg w-full"
+                >
+                  Webmail
+                </NavLink>
+              </div>
+            </>
+          ) : (
+            <>
+              <NavLink
+                href="/#pilastri"
+                onClick={() => setIsOpen(false)}
+                className="text-lg w-full"
+              >
+                Valori
+              </NavLink>
+              <NavLink
+                href="/#chi-siamo"
+                onClick={() => setIsOpen(false)}
+                className="text-lg w-full"
+              >
+                Chi Siamo
+              </NavLink>
+              <NavLink
+                href="/#territorio"
+                onClick={() => setIsOpen(false)}
+                className="text-lg w-full"
+              >
+                Territorio
+              </NavLink>
+              <NavLink
+                href="/#come-funziona"
+                onClick={() => setIsOpen(false)}
+                className="text-lg w-full"
+              >
+                Come funziona
+              </NavLink>
+              <NavLink
+                href="/#produttori"
+                onClick={() => setIsOpen(false)}
+                className="text-lg w-full"
+              >
+                Produttori
+              </NavLink>
+              <NavLink
+                href="/#faq"
+                onClick={() => setIsOpen(false)}
+                className="text-lg w-full"
+              >
+                FAQ
+              </NavLink>
+              <NavLink
+                href="/#contatti"
+                onClick={() => setIsOpen(false)}
+                className="text-lg w-full"
+              >
+                Contatti
+              </NavLink>
+            </>
           )}
           <div className="mt-2 text-center w-full">
             {user ? (
