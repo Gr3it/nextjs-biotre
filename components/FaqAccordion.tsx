@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, HelpCircle } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 const faqs = [
   {
     category: "Iscrizione",
     question: "Qual è la quota associativa e quando posso iscrivermi?",
     answer:
-      "La quota associativa annuale è di [X] euro. Le iscrizioni sono solitamente sempre aperte, ma consigliamo di contattarci per verificare eventuali periodi di inserimento facilitato per i nuovi soci.",
+      "La quota associativa è deliberata ogni anno in assemblea in base alle necessità e si aggira intorno ai 15 euro. Le iscrizioni sono solitamente sempre aperte, ma consigliamo di contattarci per verificare eventuali periodi di inserimento facilitato per i nuovi soci.",
   },
   {
     category: "Gestione Ordini",
@@ -32,13 +32,13 @@ const faqs = [
     category: "Comunicazioni",
     question: "Come vengono gestite le comunicazioni ufficiali?",
     answer:
-      "Utilizziamo principalmente l'email per le comunicazioni formali e i listini. Per avvisi più veloci o coordinamento dei ritiri, utilizziamo gruppi dedicati su [WhatsApp/Telegram].",
+      "Utilizziamo principalmente l'email per le comunicazioni formali e i listini. Per avvisi più veloci o coordinamento dei ritiri, utilizziamo gruppi dedicati su WhatsApp.",
   },
   {
     category: "Pagamenti",
     question: "Come si paga la merce?",
     answer:
-      "Il pagamento avviene solitamente tramite [Bonifico/Borsellino virtuale/Contanti]. Ogni produttore può avere modalità specifiche che vengono indicate chiaramente al momento dell'ordine.",
+      "I pagamenti vengono effettuati attraverso addebito diretto SEPA su conto bancario a fine mese.",
   },
 ];
 
