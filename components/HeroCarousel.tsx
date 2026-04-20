@@ -5,8 +5,8 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const images = [
-  { src: "/images/hero/Manifestazione.jpeg", alt: "Manifestazione Biotre" },
   { src: "/images/hero/Stand.jpeg", alt: "Stand Biotre" },
+  { src: "/images/hero/Consegna.jpeg", alt: "Consegna Biotre" },
   { src: "/images/hero/Verdure.jpg", alt: "Verdure a Km 0" },
 ];
 
@@ -44,6 +44,7 @@ export default function HeroCarousel() {
               src={img.src}
               alt={img.alt}
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
               className="object-cover"
               priority={i === 0}
             />

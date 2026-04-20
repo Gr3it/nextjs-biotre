@@ -54,6 +54,7 @@ export default async function Home() {
                   height={532}
                   className="object-contain w-full h-auto drop-shadow-sm"
                   priority
+                  loading="eager"
                 />
               </div>
             </div>

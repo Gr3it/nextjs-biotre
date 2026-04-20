@@ -16,6 +16,8 @@ export default function Footer() {
                 width={1080}
                 height={532}
                 className="object-contain w-auto h-20 opacity-90 hover:opacity-100 transition-opacity"
+                priority
+                loading="eager"
               />
             </Link>
             <div className="flex flex-col gap-1 text-white/70">

@@ -58,6 +58,8 @@ export default function Navbar({ session }: { session: SessionData | null }) {
               width={512}
               height={512}
               className="object-contain w-auto h-10"
+              priority
+              loading="eager"
             />
           </div>
           {/* Desktop Logo */}
@@ -68,6 +70,8 @@ export default function Navbar({ session }: { session: SessionData | null }) {
               width={1080}
               height={532}
               className="object-contain w-auto h-12"
+              priority
+              loading="eager"
             />
           </div>
         </Link>
