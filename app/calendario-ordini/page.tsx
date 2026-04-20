@@ -98,7 +98,7 @@ export default async function CalendarioOrdiniPage() {
                     return (
                       <div
                         key={`h-${i}`}
-                        className={`py-3 ${isMonth ? "px-1" : "px-3"} font-serif font-semibold text-sm bg-primary-dark text-white border-b border-r border-white/10 flex items-center justify-center text-center`}
+                        className={`py-3 ${isMonth ? "px-1" : "px-3"} font-serif font-semibold text-sm bg-primary-dark text-white border-b border-r border-white/10 flex items-center justify-center text-center sticky top-0 ${i === 0 ? "left-0 z-20" : "z-10"}`}
                       >
                         {header}
                       </div>
