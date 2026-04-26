@@ -45,10 +45,15 @@ export default async function CalendarioOrdiniPage() {
   const rawHeaders = rows?.[0]?.map((h) => String(h).trim()) ?? [];
   const rawData = rows?.slice(1) ?? [];
 
-  // Filtra headers e dati saltando la quinta colonna
-  const headers = rawHeaders.filter((_, i) => i !== 4);
+  // Filtra headers e dati rimuovendo la colonna "Aggiornato a" se presente
+  const indexToRemove = rawHeaders.findIndex(
+    (h) => h.toLowerCase() === "aggiornato a",
+  );
+  const headers = rawHeaders.filter((_, i) => i !== indexToRemove);
   const sanitizedData = rawData.map((row) =>
-    headers.map((_, i) => String(row[i < 4 ? i : i + 1] ?? "").trim()),
+    row
+      .filter((_, i) => i !== indexToRemove)
+      .map((cell) => String(cell ?? "").trim()),
   );
 
   return (

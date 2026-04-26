@@ -9,7 +9,7 @@ export const revalidate = 86400; // Cache for 24 hours
 
 async function getProducersData() {
   try {
-    const rows = await getGoogleSheetData("Sheet1!A1:B200");
+    const rows = await getGoogleSheetData("Sheet1!A1:C200");
     if (!rows || rows.length <= 1) return [];
 
     // Filter out rows where producer name is empty or looks like a header
@@ -24,6 +24,7 @@ async function getProducersData() {
       .map((row) => ({
         name: String(row[0]).trim(),
         products: String(row[1] || "").trim(),
+        origin: String(row[2] || "").trim(),
       }))
       .sort((a, b) => a.name.localeCompare(b.name));
   } catch (error) {

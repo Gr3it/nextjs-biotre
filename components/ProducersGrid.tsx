@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, Store, Package } from "lucide-react";
+import { ChevronDown, Store, MapPin } from "lucide-react";
 
 interface Producer {
   name: string;
   products: string;
+  origin?: string;
 }
 
 interface ProducersGridProps {
@@ -27,9 +28,9 @@ export default function ProducersGrid({ producers }: ProducersGridProps) {
         {displayedProducers.map((producer, index) => (
           <div
             key={index}
-            className="group bg-white p-6 rounded-2xl border border-border/50 shadow-xs hover:shadow-md hover:border-primary/20 transition-all duration-300"
+            className="group bg-white p-6 rounded-2xl border border-border/50 shadow-xs hover:shadow-md hover:border-primary/20 transition-all duration-300 flex flex-col justify-between"
           >
-            <div className="flex items-center gap-4">
+            <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-primary/5 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
                 <Store className="w-6 h-6" />
               </div>
@@ -42,6 +43,14 @@ export default function ProducersGrid({ producers }: ProducersGridProps) {
                 </p>
               </div>
             </div>
+            {producer.origin && (
+              <div className="flex items-center gap-2 mt-3 text-primary/70">
+                <MapPin className="w-4 h-4 shrink-0" />
+                <span className="text-[11px] font-bold uppercase tracking-wider truncate">
+                  {producer.origin}
+                </span>
+              </div>
+            )}
           </div>
         ))}
       </div>
