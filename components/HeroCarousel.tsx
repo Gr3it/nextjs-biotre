@@ -5,8 +5,9 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const images = [
-  { src: "/images/hero/Stand.jpeg", alt: "Stand Biotre" },
+  { src: "/images/hero/Manifestazione.jpeg", alt: "Manifestazione Biotre" },
   { src: "/images/hero/Consegna.jpeg", alt: "Consegna Biotre" },
+  { src: "/images/hero/Stand.jpeg", alt: "Stand Biotre" },
   { src: "/images/hero/Verdure.jpg", alt: "Verdure a Km 0" },
 ];
 

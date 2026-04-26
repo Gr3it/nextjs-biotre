@@ -225,7 +225,7 @@ export default async function Home() {
 
           <div className="w-full relative aspect-4/3 rounded-3xl overflow-hidden shadow-lg border border-border order-1 lg:order-2">
             <Image
-              src="/images/Members.jpeg"
+              src="/images/Members.jpg"
               alt="I soci di Biotre GAS Trento"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
